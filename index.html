@@ -25,6 +25,7 @@
         }
 
         body {
+            counter-reset: list;
             background-color: whitesmoke;
         }
 
@@ -59,6 +60,11 @@
             margin-bottom: 0;
             text-align: left;
             font-family: 'Times New Roman';
+        }
+
+        .quizapp__question > span:before {
+          content: counter(list) ") ";
+          counter-increment: list;
         }
 
         .quizapp__question > p {
@@ -115,12 +121,15 @@
             margin-left: 40px;
             text-decoration: none;
             cursor: pointer;
+            background-color: lightgreen;
+            padding: 10px;
+            border-radius: 10px;
 
         }
 
-        .quizapp__viewAns * {
+        /* .quizapp__viewAns * {
             color: #0077CC;
-        }
+        } */
 
         .quizapp__viewAns :hover {
             text-decoration: underline;
@@ -221,7 +230,7 @@
 
           output.push(
             `<div class="quizapp__content content${index}">
-                <div class="quizapp__question"><span>Q: </span> <p> ${currentQuestion.question}</p> </div>
+                <div class="quizapp__question"><span> </span> <p> ${currentQuestion.question}</p> </div>
                 <div class="quizapp__answers">${answers.join("")}</div>
                 <div class="quizapp__viewAns"><a href="javascript:showAns('${currentQuestion.correctAnswer}' ,'${index}');"><i class="fas fa-eye"></i> View Answer</a></div>
             </div>`
