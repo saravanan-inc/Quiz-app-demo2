@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: cursive;
+            font-size: 14px;
+            line-height: 22px;
+            color: rgb(34, 34, 34);
+        }
+
+        body {
+            background-color: whitesmoke;
+        }
+
+        #quizapp__container {
+            max-width: 80%;
+            margin: 50px auto;
+        }
+
+        .quizapp__content {
+            background-color: yellow;
+            padding: 20px;
+            background-color: white;
+            text-align: left;
+            width: 100%;
+            border-radius: 14px;
+            border: 1px solid #E5E7EB;
+            margin-top: 20px;
+        }
+
+        .quizapp__question {
+            margin-bottom: 5px;
+            display: flex;
+            line-height: 22px;
+        }
+
+        .quizapp__question > span {
+            width: 20px;
+            color: rgb(204, 0, 0);
+            font-weight: 700;
+            font-size: 16px;
+            list-style: 25px;
+            margin-bottom: 0;
+            text-align: left;
+            font-family: 'Times New Roman';
+        }
+
+        .quizapp__question > p {
+            font-size: 16px;
+            list-style: 25px;
+            margin: auto 20px;
+            word-break: break-word;
+        }
+
+        .quizapp__answers {
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            margin-left: 40px;
+        }
+
+        .fa-check-circle {
+         color: green;
+         margin-left: 10px;   
+        }
+
+        .fa-times-circle {
+         color: red;   
+         margin-left: 10px;   
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        input[type=radio] {
+            margin-right: 5px;
+            width: 15px;
+            height: 15px;
+            color: #111827;
+            border-radius: 50%;
+            background: none;
+            border: none;
+            appearance: none;
+            padding: none;
+            pointer-events: none;
+            transition: box-shadow 250ms cubic-bezier(.95,.15,.5,1.25);
+            box-shadow: inset 0 0 0 0.1rem #D1D5DB;
+        }
+
+        input[type=radio]:checked {
+            box-shadow: inset 0 0 0 0.4rem #6B7280;
+        }
+
+        .quizapp__viewAns > a {
+            margin-left: 40px;
+            text-decoration: none;
+            cursor: pointer;
+
+        }
+
+        .quizapp__viewAns * {
+            color: #0077CC;
+        }
+
+        .quizapp__viewAns :hover {
+            text-decoration: underline;
+            color: black;
+        }
+
+        .quizapp__showAnswer {
+            margin: 20px 40px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            word-wrap: break-word;
+        }
+
+        .quizapp__showAnswer > span {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .quizapp__showAnswer p {
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        @media (max-width: 768px) {
+            .quizapp__answers {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .quizapp__showAnswer {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+  </head>
+  <body>
+    <div id="quizapp__container"></div>
+
+    <script>
+      const myQuestions = [
+        {
+          question: "Who invented JavaScript?",
+          answers: {
+            A: "Douglas Crockford",
+            B: "Sheryl Sandberg",
+            C: "Brendan Eich",
+            D: "Brendan Eich",
+          },
+          correctAnswer: "C",
+        },
+        {
+          question: "Which one of these is a JavaScript package manager?",
+          answers: {
+            A: "Node.js",
+            B: "TypeScript",
+            C: "npm",
+            D: "npm",
+          },
+          correctAnswer: "C",
+        },
+        {
+          question: "Which tool can you use to ensure code quality?",
+          answers: {
+            A: "Angular",
+            B: "jQuery",
+            C: "RequireJS",
+            D: "ESLint",
+          },
+          correctAnswer: "D",
+        },
+      ];
+
+      const quizContainer = document.querySelector("#quizapp__container");
+
+      function buildQuiz() {
+        const output = [];
+
+        myQuestions.forEach((currentQuestion, index) => {
+          const answers = [];
+          for (letter in currentQuestion.answers) {
+            answers.push(
+              `<label>
+                        <input onchange="showResults(this)" type="radio" name="question${index}" value="${letter}">
+                        ${letter})
+                        ${currentQuestion.answers[letter]}
+                </label>`
+            );
+          }
+
+          output.push(
+            `<div class="quizapp__content content${index}">
+                <div class="quizapp__question"><span>Q: </span> <p> ${currentQuestion.question}</p> </div>
+                <div class="quizapp__answers">${answers.join("")}</div>
+                <div class="quizapp__viewAns"><a href="javascript:showAns('${currentQuestion.correctAnswer}' ,'${index}');"><i class="fas fa-eye"></i> View Answer</a></div>
+            </div>`
+          );
+        });
+        quizContainer.innerHTML = output.join("");
+      }
+
+      function showResults(e) {
+        const questionNum = e.name.slice(8);
+        const options = e.value;
+        const icon = document.createElement("i");
+
+        const iconsDel = document.getElementsByName(`question${questionNum}`);
+        iconsDel.forEach((ico) => {
+          if (ico.parentElement?.querySelector("i") !== null) {
+            ico.parentElement?.querySelector("i").remove();
+          }
+        });
+
+        if (myQuestions[questionNum].correctAnswer == options) {
+          icon.className = "fas fa-check-circle";
+          return e.parentElement.appendChild(icon);
+        }
+        icon.className = "fas fa-times-circle";
+        return e.parentElement.appendChild(icon);
+      }
+
+      buildQuiz();
+
+      function showAns(currentQuestion, index) {
+        if (document.querySelector(`.content${index}`).querySelector(".quizapp__showAnswer") === null){
+            let div = document.createElement('div');
+            div.className = "quizapp__showAnswer"
+            div.innerHTML = `<span>Answer : <p> ${myQuestions[index].correctAnswer})  ${myQuestions[index].answers[currentQuestion]}</p> </span> `;
+
+            document.querySelector(`.content${index}`).appendChild(div);
+        } else {
+            document.querySelector(`.content${index}`).querySelector(".quizapp__showAnswer").remove()
+        }
+        
+      }
+    </script>
+  </body>
+</html>
