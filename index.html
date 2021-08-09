@@ -11,7 +11,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Document</title>
+    <title>Quiz App</title>
 
     <style>
         * {
@@ -256,7 +256,7 @@
         if (document.querySelector(`.content${index}`).querySelector(".quizapp__showAnswer") === null){
             let div = document.createElement('div');
             div.className = "quizapp__showAnswer"
-            div.innerHTML = `<span>Answer : <p> ${myQuestions[index].correctAnswer})  ${myQuestions[index].answers[currentQuestion]}</p> </span> `;
+            div.innerHTML = `<span>Answer: <p> ${myQuestions[index].correctAnswer})  ${myQuestions[index].answers[currentQuestion]}</p> </span> `;
 
             document.querySelector(`.content${index}`).appendChild(div);
         } else {
