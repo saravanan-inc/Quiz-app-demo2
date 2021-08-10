@@ -14,164 +14,234 @@
     <title>Quiz App</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 22px;
-            color: rgb(34, 34, 34);
-        }
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font-family: monospace;
+        font-size: 14px;
+        line-height: 22px;
+        color: rgb(34, 34, 34);
+      }
 
-        body {
-            counter-reset: list;
-            background-color: whitesmoke;
-        }
+      body {
+        counter-reset: list;
+        background-color: whitesmoke;
+      }
 
-        #quizapp__container {
-            max-width: 80%;
-            margin: 50px auto;
-        }
+      #quizapp__container {
+        max-width: 95%;
+        margin: 50px auto;
+      }
 
-        .quizapp__content {
-            background-color: yellow;
-            padding: 20px;
-            background-color: white;
-            text-align: left;
-            width: 100%;
-            border-radius: 14px;
-            border: 1px solid #E5E7EB;
-            margin-top: 20px;
-        }
+      .quizapp__content {
+        background-color: yellow;
+        padding: 20px;
+        background-color: white;
+        text-align: left;
+        width: 100%;
+        border-radius: 14px;
+        border: 1px solid #e5e7eb;
+        margin-top: 5px;
+      }
 
-        .quizapp__question {
-            margin-bottom: 5px;
-            display: flex;
-            line-height: 22px;
-        }
+      .quizapp__question {
+        margin-bottom: 5px;
+        display: flex;
+        line-height: 22px;
+      }
 
-        .quizapp__question > span {
-            width: 20px;
-            color: rgb(204, 0, 0);
-            font-weight: 700;
-            font-size: 16px;
-            list-style: 25px;
-            margin-bottom: 0;
-            text-align: left;
-            font-family: 'Times New Roman';
-        }
+      .quizapp__question > span {
+        width: 20px;
+        color: rgb(204, 0, 0);
+        font-weight: 700;
+        font-size: 16px;
+        list-style: 25px;
+        margin-bottom: 0;
+        text-align: left;
+        font-family: "Times New Roman";
+      }
 
-        .quizapp__question > span:before {
-          content: counter(list) ") ";
-          counter-increment: list;
-        }
+      .quizapp__question > span:before {
+        content: counter(list) ") ";
+        counter-increment: list;
+      }
 
-        .quizapp__question > p {
-            font-size: 16px;
-            list-style: 25px;
-            margin: auto 20px;
-            word-break: break-word;
-        }
+      .quizapp__question > p {
+        font-size: 16px;
+        list-style: 25px;
+        margin: auto 5px;
+        word-break: break-word;
+      }
 
+      .quizapp__answers {
+        margin: 15px 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        margin-left: 25px;
+      }
+
+      .fa-check-circle {
+        color: green;
+        margin-left: 10px;
+      }
+
+      .fa-times-circle {
+        color: red;
+        margin-left: 10px;
+      }
+
+      label {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        /* margin-bottom: 12px; */
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      label input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .quizapp__checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+      }
+
+      label:hover input ~ .quizapp__checkmark {
+        background-color: #ccc;
+      }
+
+      label input:checked ~ .quizapp__checkmark {
+        background-color: #2196f3;
+      }
+
+      .quizapp__checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      label .quizapp__checkmark:after {
+        left: 6px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      label input:checked ~ .quizapp__checkmark:after {
+        display: block;
+      }
+
+      input[type="radio"] {
+        margin-right: 5px;
+      }
+
+      input[type="radio"]:checked {
+        background: #888;
+        color: #fff;
+        text-decoration: line-through;
+      }
+
+      input[type="radio"]:checked {
+        content: "";
+        position: absolute;
+        border-color: #fff;
+        border-style: solid;
+        border-width: 0 2px 2px 0;
+        top: 10px;
+        left: 16px;
+        transform: rotate(45deg);
+        height: 15px;
+        width: 7px;
+      }
+
+      .quizapp__viewAns > a {
+        margin-left: 25px;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: lightgreen;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      .quizapp__viewAns {
+        margin-top: 20px;
+      }
+
+      .quizapp__viewAns :hover {
+        text-decoration: underline;
+        color: black;
+      }
+
+      .quizapp__showAnswer {
+        margin: 20px 25px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        word-wrap: break-word;
+        width: 98%;
+        animation: fadeInUp 1s ease-in-out 0s forwards;
+      }
+      
+      @keyframes fadeInUp {
+      from { 
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+      }
+    }
+
+      .quizapp__showAnswer > span {
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+      }
+
+      .quizapp__showAnswer p {
+        font-size: 16px;
+        font-weight: normal;
+      }
+
+      @media (max-width: 768px) {
         .quizapp__answers {
-            margin: 20px 0;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 10px;
-            margin-left: 40px;
-        }
-
-        .fa-check-circle {
-         color: green;
-         margin-left: 10px;   
-        }
-
-        .fa-times-circle {
-         color: red;   
-         margin-left: 10px;   
-        }
-
-        label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        input[type=radio] {
-            margin-right: 5px;
-            width: 15px;
-            height: 15px;
-            color: #111827;
-            border-radius: 50%;
-            background: none;
-            border: none;
-            appearance: none;
-            padding: none;
-            pointer-events: none;
-            transition: box-shadow 250ms cubic-bezier(.95,.15,.5,1.25);
-            box-shadow: inset 0 0 0 0.1rem #D1D5DB;
-        }
-
-        input[type=radio]:checked {
-            box-shadow: inset 0 0 0 0.4rem #6B7280;
-        }
-
-        .quizapp__viewAns > a {
-            margin-left: 40px;
-            text-decoration: none;
-            cursor: pointer;
-            background-color: lightgreen;
-            padding: 10px;
-            border-radius: 10px;
-
-        }
-
-        /* .quizapp__viewAns * {
-            color: #0077CC;
-        } */
-
-        .quizapp__viewAns :hover {
-            text-decoration: underline;
-            color: black;
+          grid-template-columns: repeat(1, 1fr);
         }
 
         .quizapp__showAnswer {
-            margin: 20px 40px;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 10px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            word-wrap: break-word;
+          font-size: 14px;
         }
 
-        .quizapp__showAnswer > span {
-            font-size: 18px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
+        #quizapp__container {
+          max-width: 98%;
         }
-
-        .quizapp__showAnswer p {
-            font-size: 16px;
-            font-weight: normal;
-        }
-
-        @media (max-width: 768px) {
-            .quizapp__answers {
-                grid-template-columns: repeat(1, 1fr);
-            }
-
-            .quizapp__showAnswer {
-                font-size: 14px;
-            }
-
-            #quizapp__container{
-              max-width: 98%;
-            }
-        }
-
+      }
     </style>
   </head>
   <body>
@@ -222,6 +292,7 @@
             answers.push(
               `<label>
                         <input onchange="showResults(this)" type="radio" name="question${index}" value="${letter}">
+                        <span class="quizapp__checkmark"></span>
                         ${letter})
                         ${currentQuestion.answers[letter]}
                 </label>`
@@ -230,9 +301,13 @@
 
           output.push(
             `<div class="quizapp__content content${index}">
-                <div class="quizapp__question"><span> </span> <p> ${currentQuestion.question}</p> </div>
+                <div class="quizapp__question"><span> </span> <p> ${
+                  currentQuestion.question
+                }</p> </div>
                 <div class="quizapp__answers">${answers.join("")}</div>
-                <div class="quizapp__viewAns"><a href="javascript:showAns('${currentQuestion.correctAnswer}' ,'${index}');"><i class="fas fa-eye"></i> View Answer</a></div>
+                <div class="quizapp__viewAns"><a href="javascript:showAns('${
+                  currentQuestion.correctAnswer
+                }' ,'${index}');"><i class="fas fa-eye"></i> View Answer</a></div>
             </div>`
           );
         });
@@ -262,16 +337,22 @@
       buildQuiz();
 
       function showAns(currentQuestion, index) {
-        if (document.querySelector(`.content${index}`).querySelector(".quizapp__showAnswer") === null){
-            let div = document.createElement('div');
-            div.className = "quizapp__showAnswer"
-            div.innerHTML = `<span>Answer: <p> ${myQuestions[index].correctAnswer})  ${myQuestions[index].answers[currentQuestion]}</p> </span> `;
+        if (
+          document
+            .querySelector(`.content${index}`)
+            .querySelector(".quizapp__showAnswer") === null
+        ) {
+          let div = document.createElement("div");
+          div.className = "quizapp__showAnswer";
+          div.innerHTML = `<span>Answer: <p> ${myQuestions[index].correctAnswer})  ${myQuestions[index].answers[currentQuestion]}</p> </span> `;
 
-            document.querySelector(`.content${index}`).appendChild(div);
+          document.querySelector(`.content${index}`).appendChild(div);
         } else {
-            document.querySelector(`.content${index}`).querySelector(".quizapp__showAnswer").remove()
+          document
+            .querySelector(`.content${index}`)
+            .querySelector(".quizapp__showAnswer")
+            .remove();
         }
-        
       }
     </script>
   </body>
