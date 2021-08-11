@@ -187,7 +187,6 @@
       }
 
       .quizapp__viewAns :hover {
-        text-decoration: underline;
         color: black;
       }
 
@@ -196,13 +195,12 @@
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         padding: 10px;
+        /* width: 100%; */
         display: flex;
-        align-items: center;
         word-wrap: break-word;
-        width: 98%;
         animation: fadeInUp 1s ease-in-out 0s forwards;
       }
-      
+
       @keyframes fadeInUp {
       from { 
         opacity: 0;
@@ -221,7 +219,6 @@
         font-size: 18px;
         font-weight: 600;
         display: flex;
-        align-items: center;
       }
 
       .quizapp__showAnswer p {
@@ -344,7 +341,7 @@
         ) {
           let div = document.createElement("div");
           div.className = "quizapp__showAnswer";
-          div.innerHTML = `<span>Answer: <p> ${myQuestions[index].correctAnswer})  ${myQuestions[index].answers[currentQuestion]}</p> </span> `;
+          div.innerHTML = `<span>Answer: </span> <p>${myQuestions[index].correctAnswer})  ${myQuestions[index].answers[currentQuestion]}</p>  `;
 
           document.querySelector(`.content${index}`).appendChild(div);
         } else {
