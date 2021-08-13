@@ -30,8 +30,8 @@
       }
 
       #quizapp__container {
-        max-width: 95%;
-        margin: 50px auto;
+        max-width: 100%;
+        margin: 25px auto;
       }
 
       .quizapp__content {
@@ -53,7 +53,18 @@
 
       .quizapp__question > span {
         width: 20px;
-        color: rgb(204, 0, 0);
+        color: rgb(204, 0, 0) !important;
+        font-weight: 700;
+        font-size: 16px;
+        list-style: 25px;
+        margin-bottom: 0;
+        text-align: left;
+        font-family: "Times New Roman";
+      }
+
+      .quizapp__question .quizapp__question__span {
+        width: 20px;
+        color: rgb(204, 0, 0) !important;
         font-weight: 700;
         font-size: 16px;
         list-style: 25px;
@@ -191,7 +202,7 @@
       }
 
       .quizapp__showAnswer {
-        margin: 20px 25px;
+        margin: 20px 0px 10px;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         padding: 10px 0px 10px 10px;
@@ -225,6 +236,7 @@
         font-size: 16px;
         font-weight: 900;
         color: green;
+        margin-left: 10px;
       }
 
       @media (max-width: 768px) {
@@ -290,7 +302,7 @@
             answers.push(
               `<label>
                         <input onchange="showResults(this)" type="radio" name="question${index}" value="${letter}">
-                        <span class="quizapp__checkmark"></span>
+                        <span class="quizapp__checkmark" style="background-color: #eee !important;"></span>
                         ${letter})
                         ${currentQuestion.answers[letter]}
                 </label>`
@@ -299,11 +311,11 @@
 
           output.push(
             `<div class="quizapp__content content${index}">
-                <div class="quizapp__question"><span> </span> <p> ${
+                <div class="quizapp__question"><span style="color: rgb(204, 0, 0)!important" class="quizapp__question__span"> </span> <p style="color: black"> ${
                   currentQuestion.question
                 }</p> </div>
                 <div class="quizapp__answers">${answers.join("")}</div>
-                <div class="quizapp__viewAns"><a id="${index}atag" href="javascript:showAns('${
+                <div class="quizapp__viewAns"><a style="color: black !important" id="${index}atag" href="javascript:showAns('${
               currentQuestion.correctAnswer
             }' ,'${index}');"><i class="fas fa-eye"></i> View Answer</a></div>
             </div>`
@@ -342,7 +354,7 @@
         ) {
           let div = document.createElement("div");
           div.className = "quizapp__showAnswer";
-          div.innerHTML = `<span>Answer: </span> <p>${myQuestions[index].correctAnswer})  ${myQuestions[index].answers[currentQuestion]}</p>  `;
+          div.innerHTML = `<span style="color: red !important">Ans: </span> <p style="color: green !important">${myQuestions[index].correctAnswer})  ${myQuestions[index].answers[currentQuestion]}</p>  `;
 
           document.querySelector(`.content${index}`).appendChild(div);
           document.getElementById(`${index}atag`).innerHTML =
