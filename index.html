@@ -121,7 +121,7 @@
         cursor: pointer;
       }
 
-      .quizapp__checkmark {
+      article {
         position: absolute;
         top: 0;
         left: 0;
@@ -131,21 +131,21 @@
         border-radius: 50%;
       }
 
-      label:hover input ~ .quizapp__checkmark {
+      label:hover input ~ article {
         background-color: #ccc;
       }
 
-      label input:checked ~ .quizapp__checkmark {
-        background-color: #2196f3;
+      label input:checked ~ article {
+        background: #2196f3;
       }
 
-      .quizapp__checkmark:after {
+      article:after {
         content: "";
         position: absolute;
         display: none;
       }
 
-      label .quizapp__checkmark:after {
+      label article:after {
         left: 6px;
         top: 3px;
         width: 5px;
@@ -157,7 +157,7 @@
         transform: rotate(45deg);
       }
 
-      label input:checked ~ .quizapp__checkmark:after {
+      label input:checked ~ article:after {
         display: block;
       }
 
@@ -166,15 +166,15 @@
       }
 
       input[type="radio"]:checked {
-        background: #888;
-        color: #fff;
+        background: #888 !important ;
+        color: #fff !important;
         text-decoration: line-through;
       }
 
       input[type="radio"]:checked {
         content: "";
         position: absolute;
-        border-color: #fff;
+        border-color: #fff !important;
         border-style: solid;
         border-width: 0 2px 2px 0;
         top: 10px;
@@ -302,7 +302,7 @@
             answers.push(
               `<label>
                         <input onchange="showResults(this)" type="radio" name="question${index}" value="${letter}">
-                        <span class="quizapp__checkmark" style="background-color: #eee !important;"></span>
+                        <article class="quizapp__checkmark" ></article>
                         ${letter})
                         ${currentQuestion.answers[letter]}
                 </label>`
@@ -311,9 +311,9 @@
 
           output.push(
             `<div class="quizapp__content content${index}">
-                <div class="quizapp__question"><span style="color: rgb(204, 0, 0)!important" class="quizapp__question__span"> </span> <p style="color: black"> ${
-                  currentQuestion.question
-                }</p> </div>
+              <div class="quizapp__question"><span style="color: rgb(204, 0, 0)!important" class="quizapp__question__span"> </span> <p style="color: black"> ${
+                currentQuestion.question
+              }</p> </div>
                 <div class="quizapp__answers">${answers.join("")}</div>
                 <div class="quizapp__viewAns"><a style="color: black !important" id="${index}atag" href="javascript:showAns('${
               currentQuestion.correctAnswer
