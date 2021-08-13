@@ -43,6 +43,26 @@
         border-radius: 14px;
         border: 1px solid #e5e7eb;
         margin-top: 5px;
+        position: relative;
+      }
+
+      .quizapp__content b {
+        position: absolute;
+        color: rgba(0, 0, 0, 0.04);
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        transform: rotate(350deg);
+        user-select: none;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        letter-spacing: 24px;
+        overflow: hidden;
       }
 
       .quizapp__question {
@@ -251,6 +271,11 @@
         #quizapp__container {
           max-width: 98%;
         }
+
+        .quizapp__content b {
+          width: initial;
+          letter-spacing: initial;
+        }
       }
     </style>
   </head>
@@ -311,6 +336,7 @@
 
           output.push(
             `<div class="quizapp__content content${index}">
+              <b>Kalvithugal</b>
               <div class="quizapp__question"><span style="color: rgb(204, 0, 0)!important" class="quizapp__question__span"> </span> <p style="color: black"> ${
                 currentQuestion.question
               }</p> </div>
