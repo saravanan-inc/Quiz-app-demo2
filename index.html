@@ -43,7 +43,6 @@
         border-radius: 14px;
         border: 1px solid #e5e7eb;
         margin-top: 5px;
-        position: relative;
       }
 
       .quizapp__content b {
@@ -211,6 +210,8 @@
         background-color: lightgreen;
         padding: 10px;
         border-radius: 10px;
+        position: relative;
+        z-index: 1;
       }
 
       .quizapp__viewAns {
@@ -334,7 +335,7 @@
           }
 
           output.push(
-            `<div class="quizapp__content content${index}">
+            `<div style="position: relative " class="quizapp__content content${index}">
               <div class="quizapp__question"><span style="color: rgb(204, 0, 0)!important" class="quizapp__question__span"> </span> <p style="color: black"> ${
                 currentQuestion.question
               }</p> </div>
