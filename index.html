@@ -211,8 +211,6 @@
         background-color: lightgreen;
         padding: 10px;
         border-radius: 10px;
-        position: relative;
-        z-index: 1;
       }
 
       .quizapp__viewAns {
@@ -275,7 +273,6 @@
         }
 
         .quizapp__content b {
-          width: initial;
           letter-spacing: initial;
         }
       }
@@ -338,7 +335,6 @@
 
           output.push(
             `<div class="quizapp__content content${index}">
-              <b>Kalvithugal</b>
               <div class="quizapp__question"><span style="color: rgb(204, 0, 0)!important" class="quizapp__question__span"> </span> <p style="color: black"> ${
                 currentQuestion.question
               }</p> </div>
@@ -346,6 +342,8 @@
                 <div class="quizapp__viewAns"><a style="color: black !important" id="${index}atag" href="javascript:showAns('${
               currentQuestion.correctAnswer
             }' ,'${index}');"><i class="fas fa-eye"></i> View Answer</a></div>
+            <b>Kalvithugal</b>
+            
             </div>`
           );
         });
